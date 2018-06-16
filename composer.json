@@ -22,7 +22,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "digitickets\\Package\\": "src"
+      "DigiTickets\\Bambora\\": "src"
     }
   },
   "require": {
