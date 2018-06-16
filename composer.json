@@ -1,0 +1,9 @@
+{
+  "name": "digitickets/omnipay-bambora",
+  "description": "Payment Gateway driver for Bambora",
+  "autoload": {
+    "psr-4": {
+      "digitickets\\Package\\": "src"
+    }
+  }
+}
