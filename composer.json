@@ -1,9 +1,36 @@
 {
   "name": "digitickets/omnipay-bambora",
+  "type": "library",
   "description": "Payment Gateway driver for Bambora",
+  "keywords": [
+    "bambora",
+    "td",
+    "gateway",
+    "merchant",
+    "omnipay",
+    "pay",
+    "payment"
+  ],
+  "homepage": "https://github.com/digitickets/omnipay-bambora",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Glenn Jenkins",
+      "email": "pedanticantic@gmail.com",
+      "role": "Developer"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "digitickets\\Package\\": "src"
     }
-  }
+  },
+  "require": {
+    "omnipay/common": "~2.0"
+  },
+  "require-dev": {
+    "omnipay/tests": "~2.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
