@@ -2,6 +2,7 @@
 
 namespace DigiTickets\Bambora;
 
+use DigiTickets\Bambora\Messages\CompletePurchaseRequest;
 use DigiTickets\Bambora\Messages\PurchaseRequest;
 use Omnipay\Common\AbstractGateway;
 
@@ -20,5 +21,10 @@ class PaymentPageGateway extends AbstractGateway
     public function purchase(array $parameters = array())
     {
         return $this->createRequest(PurchaseRequest::class, $parameters);
+    }
+
+    public function completePurchase(array $parameters = array())
+    {
+        return $this->createRequest(CompletePurchaseRequest::class, $parameters);
     }
 }
