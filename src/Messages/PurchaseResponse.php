@@ -19,8 +19,11 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
 
     public function getRedirectUrl()
     {
-error_log('getRedirectUrl in Bambora response object. Endpoint is: '.$this->getRequest()->getEndpoint());
-        return $this->getRequest()->getEndpoint().'?'.http_build_query($this->data);
+        $params = http_build_query($this->data);
+
+        $params .= $this->buildHashParameter($params);
+
+        return $this->getRequest()->getEndpoint().'?'.$params;
     }
 
     public function getRedirectMethod()
@@ -31,5 +34,21 @@ error_log('getRedirectUrl in Bambora response object. Endpoint is: '.$this->getR
     public function getRedirectData()
     {
         return null;
+    }
+
+    /**
+     * @param string $params
+     *
+     * @return null|string Null if there is no hash key; an md5 string otherwise
+     */
+    protected function buildHashParameter(string $params)
+    {
+        $hashKey = $this->getRequest()->getHashKey();
+        if (empty($hashKey)) {
+            return null;
+        }
+
+        // Note, there are no characters between the params query string and the hash key in the call to md5.
+        return '&hashValue='.md5($params.$hashKey);
     }
 }

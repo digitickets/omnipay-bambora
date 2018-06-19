@@ -36,9 +36,14 @@ class PurchaseRequest extends AbstractRequest
         return 'P';
     }
 
-    public function getHashValue()
+    public function getHashKey()
     {
-        return $this->getParameter('HashValue');
+        return $this->getParameter('hashKey');
+    }
+
+    public function setHashKey($value)
+    {
+        return $this->setParameter('hashKey', $value);
     }
 
     public function getHashExpiry()
@@ -64,7 +69,6 @@ error_log('getData...');
         $data['trnType'] = $this->getTrnType();
         $data['approvedPage'] = $this->getReturnUrl();
         $data['declinedPage'] = $this->getNotifyUrl() ?: $this->getReturnUrl();;
-        $data['hashValue'] = $this->getHashValue(); // @TODO
         $data['hashExpiry'] = $this->getHashExpiry(); // @TODO
 
         if ($this->getCard()) {
