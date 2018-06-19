@@ -36,16 +36,6 @@ class PurchaseRequest extends AbstractRequest
         return 'P';
     }
 
-    public function getApprovedPage()
-    {
-        return $this->getParameter('ApprovedPage');
-    }
-
-    public function getDeclinedPage()
-    {
-        return $this->getParameter('DeclinedPage');
-    }
-
     public function getHashValue()
     {
         return $this->getParameter('HashValue');
@@ -72,10 +62,10 @@ error_log('getData...');
         $data['trnAmount'] = $this->getTrnAmount();
         $data['trnOrderNumber'] = $this->getTrnOrderNumber();
         $data['trnType'] = $this->getTrnType();
-        $data['approvedPage'] = $this->getApprovedPage();
-        $data['declinedPage'] = $this->getDeclinedPage();
-        $data['hashValue'] = $this->getHashValue();
-        $data['hashExpiry'] = $this->getHashExpiry();
+        $data['approvedPage'] = $this->getReturnUrl();
+        $data['declinedPage'] = $this->getNotifyUrl() ?: $this->getReturnUrl();;
+        $data['hashValue'] = $this->getHashValue(); // @TODO
+        $data['hashExpiry'] = $this->getHashExpiry(); // @TODO
 
         if ($this->getCard()) {
             $data['ordName'] = $this->getCard()->getName();
