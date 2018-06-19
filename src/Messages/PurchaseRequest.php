@@ -46,9 +46,28 @@ class PurchaseRequest extends AbstractRequest
         return $this->setParameter('hashKey', $value);
     }
 
-    public function getHashExpiry()
+    public function getHashExpiryMinutes()
     {
-        return $this->getParameter('HashExpiry');
+        return $this->getParameter('hashExpiryMinutes');
+    }
+
+    public function setHashExpiryMinutes($value)
+    {
+        if ($value != (int) $value || $value < 1) {
+            throw new \InvalidArgumentException('Hash expiry minutes must be a positive integer');
+        }
+
+        return $this->setParameter('hashExpiryMinutes', $value);
+    }
+
+    protected function calculateHashExpiryDate()
+    {
+        // This is my best guess for the correct timezone to use.
+        $expiryDate = new \DateTime('now', new \DateTimeZone('America/Vancouver'));
+        $expiryDate = $expiryDate->add(new \DateInterval(sprintf('PT%dM', $this->getHashExpiryMinutes())));
+
+        // Format is YYYYMMDDHH24MI.
+        return $expiryDate->format('YmdHi');
     }
 
     public function sendData($data)
@@ -68,8 +87,12 @@ error_log('getData...');
         $data['trnOrderNumber'] = $this->getTrnOrderNumber();
         $data['trnType'] = $this->getTrnType();
         $data['approvedPage'] = $this->getReturnUrl();
-        $data['declinedPage'] = $this->getNotifyUrl() ?: $this->getReturnUrl();;
-        $data['hashExpiry'] = $this->getHashExpiry(); // @TODO
+        $data['declinedPage'] = $this->getNotifyUrl() ?: $this->getReturnUrl();
+
+        // If they are using a hash key and there's an expiry interval, then calculate and set the hash expiry date.
+        if ($this->getHashKey() && $this->getHashExpiryMinutes()) {
+            $data['hashExpiry'] = $this->calculateHashExpiryDate();
+        }
 
         if ($this->getCard()) {
             $data['ordName'] = $this->getCard()->getName();
