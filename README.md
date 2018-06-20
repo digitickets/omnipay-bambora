@@ -36,6 +36,11 @@ And run composer to update your dependencies:
 
 This driver handles transaction being processed by the Payment Page of Bambora.
 
+You can pass in a hash key, which effectively switches on the hashValue parameter in the URL to Payment Page.
+
+If you pass in a hash key, you can also pass in an expiry TTL, which is an integer number of minutes.
+If present, it will add the hashExpiry parameter to the above URL.
+
 ## What's Not Included
 
 It does not use the Bambora API for making payments.
