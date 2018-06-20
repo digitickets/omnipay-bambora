@@ -72,13 +72,13 @@ class PurchaseRequest extends AbstractRequest
 
     public function sendData($data)
     {
-error_log('sendData: '.var_export($data, true));
+        error_log('sendData: '.var_export($data, true));
         return $this->response = new PurchaseResponse($this, $data);
     }
 
     public function getData()
     {
-error_log('getData...');
+        error_log('getData...');
         $this->validate('merchantId', 'amount');
 
         $data = [];
