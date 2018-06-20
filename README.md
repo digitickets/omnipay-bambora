@@ -7,7 +7,7 @@ Omnipay implementation of the Bambora payment gateway.
 It is based on the TD implementation of Bambora.
 
 [![Build Status](https://travis-ci.org/digitickets/omnipay-bambora.png?branch=master)](https://travis-ci.org/digitickets/omnipay-bambora)
-[![Latest Stable Version](https://poser.pugx.org/digitickets/omnipay-bambora/version.png)](https://packagist.org/packages/omnipay/bambora)
+[![Latest Stable Version](https://poser.pugx.org/digitickets/omnipay-bambora/version.png)](https://packagist.org/packages/digitickets/omnipay-bambora)
 [![Total Downloads](https://poser.pugx.org/digitickets/omnipay-bambora/d/total.png)](https://packagist.org/packages/digitickets/omnipay-bambora)
 
 This driver supports the Bambora payment page. Transaction information is sent via a URL.
