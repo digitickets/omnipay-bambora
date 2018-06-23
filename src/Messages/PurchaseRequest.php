@@ -43,7 +43,8 @@ class PurchaseRequest extends AbstractRequest
 
     public function setHashKey($value)
     {
-        return $this->setParameter('hashKey', $value);
+        // @TODO: Currently the hash doesn't seem to be working, so it has been left disabled.
+//        return $this->setParameter('hashKey', $value);
     }
 
     public function getHashExpiryMinutes()
@@ -53,11 +54,12 @@ class PurchaseRequest extends AbstractRequest
 
     public function setHashExpiryMinutes($value)
     {
-        if ($value != (int) $value || $value < 1) {
-            throw new \InvalidArgumentException('Hash expiry minutes must be a positive integer');
-        }
-
-        return $this->setParameter('hashExpiryMinutes', $value);
+        // @TODO: Currently the hash doesn't seem to be working, so the hash expiry has been left disabled.
+//        if ($value != (int) $value || $value < 1) {
+//            throw new \InvalidArgumentException('Hash expiry minutes must be a positive integer');
+//        }
+//
+//        return $this->setParameter('hashExpiryMinutes', $value);
     }
 
     protected function calculateHashExpiryDate()
@@ -72,13 +74,11 @@ class PurchaseRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        error_log('sendData: '.var_export($data, true));
         return $this->response = new PurchaseResponse($this, $data);
     }
 
     public function getData()
     {
-        error_log('getData...');
         $this->validate('merchantId', 'amount');
 
         $data = [];
@@ -89,10 +89,11 @@ class PurchaseRequest extends AbstractRequest
         $data['approvedPage'] = $this->getReturnUrl();
         $data['declinedPage'] = $this->getNotifyUrl() ?: $this->getReturnUrl();
 
-        // If they are using a hash key and there's an expiry interval, then calculate and set the hash expiry date.
-        if ($this->getHashKey() && $this->getHashExpiryMinutes()) {
-            $data['hashExpiry'] = $this->calculateHashExpiryDate();
-        }
+        // @TODO: Currently the hash doesn't seem to be working, so this has been left disabled.
+//        // If they are using a hash key and there's an expiry interval, then calculate and set the hash expiry date.
+//        if ($this->getHashKey() && $this->getHashExpiryMinutes()) {
+//            $data['hashExpiry'] = $this->calculateHashExpiryDate();
+//        }
 
         if ($this->getCard()) {
             $data['ordName'] = $this->getCard()->getName();
