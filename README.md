@@ -16,7 +16,7 @@ This driver supports the Bambora payment page. Transaction information is sent v
 
 **Important: Driver requires [PHP's Intl extension](http://php.net/manual/en/book.intl.php) to be installed.**
 
-The Verifone Omnipay driver is installed via [Composer](http://getcomposer.org/). To install, simply add it
+The Bambora Omnipay driver is installed via [Composer](http://getcomposer.org/). To install, simply add it
 to your `composer.json` file:
 
 ```json
